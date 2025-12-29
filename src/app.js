@@ -1,4 +1,5 @@
 require("dotenv").config();
+require("./models");
 
 const express = require("express");
 const cors = require("cors");
@@ -13,9 +14,10 @@ app.get("/", (req, res) => {
   res.send("E-commerce Backend API running 🚀");
 });
 
-sequelize.authenticate()
-  .then(() => console.log("✅ MySQL connected"))
-  .catch(err => console.error("❌ DB error:", err));
+sequelize.sync()
+  .then(() => console.log("✅ Database synced"))
+  .catch(err => console.error("❌ DB sync error:", err));
+
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
